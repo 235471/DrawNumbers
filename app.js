@@ -25,7 +25,7 @@ function draw() {
 
     // Get the relevant HTML tag to show the drawn numbers
     const changeTag = '#resultado label';
-    // Converts the set into an array and use the function join to separate the numbers with a comma
+    // Converts the set into an array and use the function join to separate the numbers with a comma and space
     const changeText = "Números sorteados: " + Array.from(uniqueNumbers).join(", ");
 
     modifyHtml(changeTag, changeText); 
