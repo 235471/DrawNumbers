@@ -12,33 +12,34 @@ function draw() {
     let drawQuantity = parseInt(document.getElementById('quantidade').value);
     let fromNumber = parseInt(document.getElementById('de').value);
     let untilNumber = parseInt(document.getElementById('ate').value);
+    // Checking if the inputs are not empty/numbers
+    if (isNaN(drawQuantity) || isNaN(fromNumber) || isNaN(untilNumber)) {
+        alert('Insira apenas números validos');    
+        return;
+    }
+
     const uniqueNumbers = new Set();
     // I want all draw numbers to be unique so instead of using an Array i used a Set
-    if (fromNumber >= 1) {        
+    if (drawQuantity >= 1) {        
         while(uniqueNumbers.size < drawQuantity) {
             uniqueNumbers.add(randomNumber(fromNumber, untilNumber));
          }
     }
-    else {
-        console.log("número invalido");
-    }
+ 
 
     // Get the relevant HTML tag to show the drawn numbers
     const changeTag = '#resultado label';
-    // Converts the set into an array and use the function join to separate the numbers with a comma and space
+    // Converts the set into an array and use the function join to separate the numbers with a comma and space. If no space wanted .join is redundant
     const changeText = "Números sorteados: " + Array.from(uniqueNumbers).join(", ");
 
     modifyHtml(changeTag, changeText); 
-    // Enabling new game button on the page by changing it's CSS class
-    document.getElementById('btn-reiniciar').classList.remove('container__botao-desabilitado');
-    document.getElementById('btn-reiniciar').classList.add('container__botao');
+    enableDisableButton('btn-reiniciar', 'container__botao');
+
 }
 
 function reset() {
     modifyHtml('#resultado label', "Números sorteados:  nenhum até agora");
-    // Disabling new game button on the page by changing it's CSS class
-    document.getElementById('btn-reiniciar').classList.remove('container__botao');
-    document.getElementById('btn-reiniciar').classList.add('container__botao-desabilitado');  
+    enableDisableButton('btn-reiniciar', 'container__botao-desabilitado');
     // Could have hardcoded but preferred to use a function to clear values.
     modifyHtmlById('quantidade', '');
     modifyHtmlById('de', '');
@@ -57,4 +58,17 @@ function modifyHtml(tag, value) {
 function modifyHtmlById(tag, value) {
     let campo = document.getElementById(tag);
     campo.value = value;
+}
+
+function enableDisableButton(id, css) {
+    if(css === 'container__botao-desabilitado') {
+        // Disabling new game button on the page by changing it's CSS class
+        document.getElementById(id).classList.remove('container__botao');
+        document.getElementById(id).classList.add('container__botao-desabilitado');  
+    }
+    else {
+        // Enabling new game button on the page by changing it's CSS class
+        document.getElementById(id).classList.remove('container__botao-desabilitado');
+        document.getElementById(id).classList.add('container__botao');
+    }
 }
