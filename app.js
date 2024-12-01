@@ -12,10 +12,21 @@ function draw() {
     let drawQuantity = parseInt(document.getElementById('quantidade').value);
     let fromNumber = parseInt(document.getElementById('de').value);
     let untilNumber = parseInt(document.getElementById('ate').value);
+
     // Checking if the inputs are not empty/numbers
     if (isNaN(drawQuantity) || isNaN(fromNumber) || isNaN(untilNumber)) {
         alert('Insira apenas números validos');    
         return;
+    }
+    // Checking if the value from is not greater than until
+    if(fromNumber >= untilNumber) {
+        alert('Valor do campo "Do número" não pode ser maior ou igual ao campo ""Até o número"');
+        return;
+    }
+    // Checking if the interval is large to avoid infinite loop
+    if(drawQuantity > (untilNumber - fromNumber +1)) {
+        alert('O intervalo entre o valor escolhido para o campo "Do número" e campo "Até o número" não comporta a quantida escolhida para sorteio');
+        return;        
     }
 
     const uniqueNumbers = new Set();
@@ -61,14 +72,14 @@ function modifyHtmlById(tag, value) {
 }
 
 function enableDisableButton(id, css) {
-    if(css === 'container__botao-desabilitado') {
+    if(document.getElementById(id).classList.contains('container__botao-desabilitado')) {
         // Disabling new game button on the page by changing it's CSS class
-        document.getElementById(id).classList.remove('container__botao');
+        document.getElementById(id).classList.remove('container__botao-desabilitado');
         document.getElementById(id).classList.add(css);  
     }
     else {
         // Enabling new game button on the page by changing it's CSS class
-        document.getElementById(id).classList.remove(css);
-        document.getElementById(id).classList.add('container__botao');
+        document.getElementById(id).classList.remove('container__botao');
+        document.getElementById(id).classList.add(css);
     }
 }
