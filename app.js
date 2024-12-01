@@ -72,6 +72,7 @@ function modifyHtmlById(tag, value) {
 }
 
 function enableDisableButton(id, css) {
+    /*
     if(document.getElementById(id).classList.contains('container__botao-desabilitado')) {
         // Disabling new game button on the page by changing it's CSS class
         document.getElementById(id).classList.remove('container__botao-desabilitado');
@@ -81,5 +82,9 @@ function enableDisableButton(id, css) {
         // Enabling new game button on the page by changing it's CSS class
         document.getElementById(id).classList.remove('container__botao');
         document.getElementById(id).classList.add(css);
-    }
+    }*/
+
+    // Changing the if else to a ternary operation
+    document.getElementById(id).classList.contains('container__botao-desabilitado') ? (document.getElementById(id).classList.remove('container__botao-desabilitado'),
+    document.getElementById(id).classList.add(css)) : (document.getElementById(id).classList.remove('container__botao'), document.getElementById(id).classList.add(css)); 
 }
