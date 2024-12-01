@@ -64,11 +64,11 @@ function enableDisableButton(id, css) {
     if(css === 'container__botao-desabilitado') {
         // Disabling new game button on the page by changing it's CSS class
         document.getElementById(id).classList.remove('container__botao');
-        document.getElementById(id).classList.add('container__botao-desabilitado');  
+        document.getElementById(id).classList.add(css);  
     }
     else {
         // Enabling new game button on the page by changing it's CSS class
-        document.getElementById(id).classList.remove('container__botao-desabilitado');
+        document.getElementById(id).classList.remove(css);
         document.getElementById(id).classList.add('container__botao');
     }
 }
